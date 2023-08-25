@@ -6,7 +6,12 @@ import Overlay from './views/Overlay/Overlay.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <CanvasView position={[-0.4, 0, 2.5]} fov={25}/>
+    <CanvasView 
+      // position={[-0.4, 0, 2.5]} 
+      position={[0, 0, 2.5]} 
+      fov={25}
+      rotation={[0, 0, 0]}
+    />
     <Overlay />
   </React.StrictMode>,
 )

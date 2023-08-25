@@ -1,4 +1,4 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, Euler, Vector3 } from '@react-three/fiber'
 import { Center, Environment, AccumulativeShadows, RandomizedLight } from '@react-three/drei'
 import { ShirtModel } from '../components/ShirtModel';
 import CameraRig from '../components/CameraRig';
@@ -33,11 +33,10 @@ function BackDrop() {
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function CanvasView({ position = [-0, 0, 2.5], fov = 25} : {position: any, fov: number}) {
+function CanvasView({ position, fov, rotation } : {position: Vector3 | undefined, fov: number, rotation: Euler | undefined}) {
   return (
     <Canvas 
-      camera={{position, rotation: [0, 0, 0], fov}}
+      camera={{position, rotation, fov}}
       eventSource={document.getElementById('root') || undefined}
       eventPrefix="client"
       shadows
