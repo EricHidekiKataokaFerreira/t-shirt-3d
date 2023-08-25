@@ -1,0 +1,82 @@
+.intro {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 5%;
+}
+
+.logo {
+  font-size: 20px;
+  color: var(--dark-color, #202020);
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons {
+  cursor: pointer;
+}
+
+.icons-container {
+  display: flex;
+  gap: 10px;
+}
+
+.main {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 84px;
+  margin-bottom: 20px;
+}
+
+.button {
+  font-family: BeauSansRegular;
+  padding: 1rem 3rem;
+  background-color: #202020;
+  color: white;
+}
+
+.description {
+  margin-bottom: 30px;
+}
+
+
+
+@font-face {
+  font-family: BeauSans;
+  src: url(../../../public/BT-BeauSans-ExtraBold-BF64d45953a17ee.ttf);
+}
+
+.BeauSans {
+  font-family: BeauSans;
+}
+
+@font-face {
+  font-family: BeauSansRegular;
+  src: url(../../../public/BT-BeauSans-Regular-BF64d45952e54c1.ttf);
+}
+
+.BeauSansRegular {
+  font-family: BeauSansRegular;
+}
+
+@font-face {
+  font-family: monumentExtended;
+  src: url(../../../public/MonumentExtended-Ultrabold.otf);
+}
+
+.monumentExtended {
+  font-family: monumentExtended;
+}
