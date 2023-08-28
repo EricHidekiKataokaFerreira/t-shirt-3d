@@ -1,11 +1,23 @@
-import { Canvas, Euler, Vector3 } from '@react-three/fiber'
+import { Canvas, Euler, Vector3, useFrame } from '@react-three/fiber'
 import { Center, Environment, AccumulativeShadows, RandomizedLight } from '@react-three/drei'
 import { ShirtModel } from '../components/ShirtModel';
 import CameraRig from '../components/CameraRig';
+import { useRef } from 'react';
+import { easing } from 'maath';
+import { useColors } from '../hooks/useColors';
 
 function BackDrop() {
+  const { color } = useColors()
+  const shadows = useRef<any>(null)
+
+  useFrame((state, delta) => {
+    if (!shadows.current) return
+    easing.dampC(shadows.current.getMesh().material.color, color.shirt, 0.25, delta)
+  })
+
   return (
     <AccumulativeShadows
+      ref={shadows}
       temporal
       frames={60}
       alphaTest={0.23}

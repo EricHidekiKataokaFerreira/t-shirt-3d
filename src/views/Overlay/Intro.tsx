@@ -1,7 +1,12 @@
+import { useColors } from '../../hooks/useColors';
+import { useOverlay } from '../../hooks/useOverlay';
 import './Overlay.css'
 import { AiOutlineTwitter, AiFillLinkedin, AiFillInstagram } from "react-icons/ai";
 
 export default function Intro () {
+  const { toggleOverlay } = useOverlay()
+  const { color } = useColors()
+  
   return (
     <section className='intro'>
       <header className='header'>
@@ -31,7 +36,11 @@ export default function Intro () {
         </p>
 
         <div>
-          <button className='button'>
+          <button 
+            className='button'
+            onClick={() => toggleOverlay()}
+            style={{backgroundColor: color.button}}
+          >
             Let's Get Started
           </button>
         </div>

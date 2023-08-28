@@ -1,6 +1,10 @@
 import React from "react";
 import { useGLTF, Preload } from "@react-three/drei";
 import { GLTF } from 'three-stdlib'
+import { useColors } from "../hooks/useColors";
+import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { easing } from "maath";
 
 type ModelProps = {
   position?: [number, number, number];
@@ -18,6 +22,12 @@ type GLTFResult = GLTF & {
 
 function Model({ position , rotation }: ModelProps) {
   const { nodes, materials } = useGLTF("/shirt_starter_test.glb") as GLTFResult
+  const { color } = useColors()
+
+  useFrame((state, delta) =>
+    easing.dampC(materials.lambert1.color, color.shirt, 0.25, delta)
+  )
+
   return (
     <group position={position} rotation={rotation}>
       <mesh
@@ -25,6 +35,7 @@ function Model({ position , rotation }: ModelProps) {
         receiveShadow
         geometry={nodes.T_Shirt_male.geometry}
         material={materials.lambert1}
+        
       />
     </group>
   );

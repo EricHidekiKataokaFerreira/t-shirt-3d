@@ -1,6 +1,11 @@
 import { AiOutlineDownload, AiOutlineArrowLeft } from "react-icons/ai"
+import { useOverlay } from "../../hooks/useOverlay"
+import { useColors } from "../../hooks/useColors"
 
 export default function Customizer () {
+  const { toggleOverlay } = useOverlay()
+  const { color, selectColor } = useColors()
+  
   const colors = ['#F4F4F4', '#FFA564', '#C495FF', '#88A9FF', '#8DF07D', '#000000']
   const decals = ['eternal', 'react_thumb', 'three2_thumb', 'pmndrs_thumb']
   
@@ -11,7 +16,10 @@ export default function Customizer () {
           everflow.
         </a>
         <div className='icons-container'>
-          <button className="go-back-button">
+          <button 
+            className="go-back-button"
+            onClick={() => toggleOverlay()}
+          >
             Go back <span className="span-icon"><AiOutlineArrowLeft /></span>
           </button>
         </div>
@@ -39,6 +47,7 @@ export default function Customizer () {
                   key={color}
                   className="color"
                   style={{ background: color }}
+                  onClick={() => selectColor(color)}
                 >
                 </div>
               )
@@ -48,7 +57,7 @@ export default function Customizer () {
 
       </div>
         <div className="button-container">
-          <button className="button">
+          <button style={{backgroundColor: color.button}} className="button">
             Download <span style={{marginLeft: '5px'}}><AiOutlineDownload /></span>
           </button>
         </div>
