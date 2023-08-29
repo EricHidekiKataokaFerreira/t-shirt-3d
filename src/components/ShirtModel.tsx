@@ -1,5 +1,5 @@
 import React from "react";
-import { useGLTF, Preload } from "@react-three/drei";
+import { useGLTF, Preload, useTexture, Decal } from "@react-three/drei";
 import { GLTF } from 'three-stdlib'
 import { useColors } from "../hooks/useColors";
 import * as THREE from "three";
@@ -21,10 +21,11 @@ type GLTFResult = GLTF & {
 }
 
 function Model({ position , rotation }: ModelProps) {
-  const { nodes, materials } = useGLTF("/shirt_starter_test.glb") as GLTFResult
+  const { nodes, materials } = useGLTF("/shirt_baked.glb") as GLTFResult
   const { color } = useColors()
+  const texture = useTexture('three2.png')
 
-  useFrame((state, delta) =>
+  useFrame((_, delta) =>
     easing.dampC(materials.lambert1.color, color.shirt, 0.25, delta)
   )
 
@@ -35,13 +36,28 @@ function Model({ position , rotation }: ModelProps) {
         receiveShadow
         geometry={nodes.T_Shirt_male.geometry}
         material={materials.lambert1}
-        
-      />
+        material-roughness={1}
+        dispose={null}
+      >
+        <Decal 
+          position={[0.07, 0.06, 0.15]}
+          rotation={[0, 0, 0]}
+          scale={0.1}
+        >
+          <meshPhysicalMaterial
+            map={texture}
+            depthTest={false}
+            depthWrite={true}
+            opacity={0.8}
+            transparent
+          />
+        </Decal>
+      </mesh>
     </group>
   );
 }
 
-export function ShirtModel({ position = [0.419, 0, 0], rotation = [Math.PI / 2, 0, 0]}: ModelProps)  {
+export function ShirtModel({ position = [0, 0.28, 0], rotation = [0, 0, 0]}: ModelProps)  {
   return (
     <React.Fragment>
       <Preload all />

@@ -8,9 +8,10 @@ import { useColors } from '../hooks/useColors';
 
 function BackDrop() {
   const { color } = useColors()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const shadows = useRef<any>(null)
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!shadows.current) return
     easing.dampC(shadows.current.getMesh().material.color, color.shirt, 0.25, delta)
   })
