@@ -2,14 +2,24 @@ import { useColors } from '../../hooks/useColors';
 import { useOverlay } from '../../hooks/useOverlay';
 import './Overlay.css'
 import { AiOutlineTwitter, AiFillLinkedin, AiFillInstagram } from "react-icons/ai";
+import { motion } from 'framer-motion'
 
-export default function Intro () {
+export default function Intro ({ config }: {config: any}) {
   const { toggleOverlay } = useOverlay()
   const { color } = useColors()
   
   return (
-    <section className='intro'>
-      <header className='header'>
+    <motion.section {...config} className='intro'>
+      <motion.header 
+        className='header'
+        initial={{opacity: 0, y: -120}}
+        animate={{opacity: 1, y: 0}}
+        transition={{
+          type: 'spring',
+          duration: 1.8,
+          delay: .2
+        }}
+      >
         <a className='logo BeauSans'>
           everflow.
         </a>
@@ -26,7 +36,7 @@ export default function Intro () {
             <AiFillInstagram size="1.3em" />
           </a>
         </div>
-      </header>
+      </motion.header>
 
       <section className='main'>
         <h1 className='title monumentExtended'>Personalize Your T-Shirt</h1>
@@ -46,6 +56,6 @@ export default function Intro () {
         </div>
 
       </section>
-    </section>
+    </motion.section>
   )
 }

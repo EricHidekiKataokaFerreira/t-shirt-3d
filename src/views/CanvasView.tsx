@@ -49,6 +49,7 @@ function BackDrop() {
 function CanvasView({ position, fov, rotation } : {position: Vector3 | undefined, fov: number, rotation: Euler | undefined}) {
   return (
     <Canvas 
+      gl={{ preserveDrawingBuffer: true }}
       camera={{position, rotation, fov}}
       eventSource={document.getElementById('root') || undefined}
       eventPrefix="client"

@@ -5,6 +5,7 @@ import { useColors } from "../hooks/useColors";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
+import { useDecal } from "../hooks/useDecal";
 
 type ModelProps = {
   position?: [number, number, number];
@@ -23,7 +24,8 @@ type GLTFResult = GLTF & {
 function Model({ position , rotation }: ModelProps) {
   const { nodes, materials } = useGLTF("/shirt_baked.glb") as GLTFResult
   const { color } = useColors()
-  const texture = useTexture('three2.png')
+  const { decal } = useDecal()
+  const texture = useTexture(`${decal}.png`)
 
   useFrame((_, delta) =>
     easing.dampC(materials.lambert1.color, color.shirt, 0.25, delta)
@@ -39,19 +41,21 @@ function Model({ position , rotation }: ModelProps) {
         material-roughness={1}
         dispose={null}
       >
-        <Decal 
-          position={[0.07, 0.06, 0.15]}
-          rotation={[0, 0, 0]}
-          scale={0.1}
-        >
-          <meshPhysicalMaterial
-            map={texture}
-            depthTest={false}
-            depthWrite={true}
-            opacity={0.8}
-            transparent
-          />
-        </Decal>
+        {decal &&
+          <Decal 
+            position={[0.07, 0.07, 0.14]}
+            rotation={[0, 0, 0]}
+            scale={0.09}
+          >
+            <meshPhysicalMaterial
+              map={texture}
+              depthTest={false}
+              depthWrite={true}
+              opacity={0.7}
+              transparent
+            />
+          </Decal>
+        }
       </mesh>
     </group>
   );
